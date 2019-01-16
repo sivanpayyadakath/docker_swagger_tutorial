@@ -19,33 +19,44 @@ module Swagger::UsersApi
         end
 
         response 200 do
-          key :description, 'User'
+          key :description, 'User specified by ID'
           schema do
-            key :'$ref', :User
+            key :required, [:id, :name]
+            property :id do
+              key :type, :integer
+              key :format, :int64
+            end
+            property :name do
+              key :type, :string
+            end
           end
         end
+
 
         extend Swagger::ErrorResponses::NotFoundError
 
       end
     end
+    #
+    # swagger_path '/users' do
+    #
+    #   operation :get do
+    #     key :description, 'Returns all users'
+    #     key :operationId, 'all_users'
+    #     key :produces,[
+    #         'application/json'
+    #     ]
+    #
+    #     response 200 do
+    #       key :description, 'User'
+    #       schema do
+    #         key :'$ref', :User
+    #       end
+    #     end
+    #     extend Swagger::ErrorResponses::NotFoundError
+    #   end
+    #
+    # end
 
-    swagger_path '/users' do
-
-      operation :get do
-        key :description, 'Returns all users'
-        key :operationId, 'all_users'
-        key :produces, [
-            'application/json',
-            'text/html'
-        ]
-        parameter do
-          key :name, :limit
-          key :type, :array
-
-        end
-      end
-
-    end
   end
 end
