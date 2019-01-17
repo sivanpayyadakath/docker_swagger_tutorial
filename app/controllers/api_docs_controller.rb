@@ -8,6 +8,7 @@ class ApiDocsController < ApplicationController
       User,
       self
   ].freeze
+
   def index
     result = Swagger::Blocks.build_root_json(SWAGGERED_CLASSES)
     render json: result

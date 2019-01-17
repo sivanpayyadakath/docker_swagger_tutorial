@@ -1,6 +1,7 @@
 module Swagger::Parameters
   def self.extended(base)
     base.parameter :user_id do
+      key :name, :id
       key :in, :path
       key :description, 'User ID'
       key :required, true
